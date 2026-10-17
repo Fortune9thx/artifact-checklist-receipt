@@ -19,13 +19,16 @@ ArtifactChecklistReceipt seals a structured checklist — a title, up to two evi
 ## Deployed contract
 
 - Network: GenLayer Studio Devnet (Studionet)
-- Address: `ACR_DEPLOY_ADDRESS_PLACEHOLDER`
-- Deploy transaction: `ACR_DEPLOY_TX_PLACEHOLDER`
-- Final status: `ACR_DEPLOY_STATUS_PLACEHOLDER`
+- Address: `0x12ccdC7A77eBBc5b907293E606EE317B69bcD2c7`
+- Deploy transaction: `0x618a8bb0e5a46263f6e550c3f64b35252fba3abce02f170c87be1478d54442c7`
+- Final status: `ACCEPTED`
 
 ### Live smoke test (end-to-end, real committed sources)
 
-ACR_LIVE_SMOKE_PLACEHOLDER
+- Checklist opened: `cl-0` — tx `0x5edde9c7d205e6f11f5f849b7e392410cdf4250de89a74f461fd28489fae11d2` (finalized)
+- Artifact pinned: tx `0x57e7739ab987bbedb5740bbb7d7245e9fbecab1f7f24b63bdb414714841ae741` (finalized), digest `e92b23b34509b58a99c593aa6a3ecaf0d307f52f88286e4213779c657dd1bcb9`
+- Sealed: `receipt-0` — tx `0xe8a4038bb0c869bcf3c052e6ae5e26a392fb9f48cd6d0d7af11ce1e086e62819` (finalized)
+- Result: fold `met`; `artifact_ok` and `evidence_ok` both `true`, and all three checks (`status == "ok"`, `score >= 1`, `name == "artifact-checklist-receipt"`) passed; the recomputed `artifact_sha256` equals the pinned digest `e92b23b3…bcb9`.
 
 ## Repository
 

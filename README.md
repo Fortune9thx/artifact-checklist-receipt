@@ -4,7 +4,7 @@ A standalone [GenLayer](https://genlayer.com) Intelligent Contract primitive tha
 
 It answers one narrow, checkable question — *"does this exact artifact, right now, satisfy this exact checklist?"* — without any model judgment, any confidence percentage, or any leader-trust shortcut.
 
-> **Deployed and proven live:** `DEPLOY_ADDRESS_PLACEHOLDER` on GenLayer Studio Devnet. Three finalized transactions opened this repository's own checklist, pinned a committed artifact by SHA-256, and issued `receipt-0` with fold `met`. Details below.
+> **Deployed and proven live:** `0x12ccdC7A77eBBc5b907293E606EE317B69bcD2c7` on GenLayer Studio Devnet. Three finalized transactions opened this repository's own checklist, pinned a committed artifact by SHA-256, and issued `receipt-0` with fold `met`. Details below.
 
 ## The trust problem it closes
 
@@ -132,7 +132,45 @@ gltest tests/direct/test_artifact_checklist_receipt.py -v
 
 ## Live deployment on GenLayer Studio Devnet
 
-LIVE_DEPLOYMENT_PLACEHOLDER
+The contract is deployed and was exercised end-to-end — three finalized consensus transactions — against a *real* committed artifact, not a mock.
+
+| | |
+|---|---|
+| Network | GenLayer Studio Devnet (`https://studio-dev.genlayer.com/api`) |
+| Contract address | `0x12ccdC7A77eBBc5b907293E606EE317B69bcD2c7` |
+| Deploy transaction | `0x618a8bb0e5a46263f6e550c3f64b35252fba3abce02f170c87be1478d54442c7` — `ACCEPTED` |
+
+The smoke test opened a checklist over this repository's own [`docs/EXAMPLE_ARTIFACT.json`](docs/EXAMPLE_ARTIFACT.json) (with [`docs/EXAMPLE_EVIDENCE.txt`](docs/EXAMPLE_EVIDENCE.txt) as evidence), pinned the artifact by its SHA-256, and sealed it:
+
+| | |
+|---|---|
+| Checklist | `cl-0` — tx `0x5edde9c7d205e6f11f5f849b7e392410cdf4250de89a74f461fd28489fae11d2` (finalized) |
+| Submit artifact | tx `0x57e7739ab987bbedb5740bbb7d7245e9fbecab1f7f24b63bdb414714841ae741` (finalized) |
+| Seal | `receipt-0` — tx `0xe8a4038bb0c869bcf3c052e6ae5e26a392fb9f48cd6d0d7af11ce1e086e62819` (finalized) |
+| Fold | **`met`** — artifact digest matched, evidence ok, all three checks passed |
+
+```json
+{
+  "schema": "acr.receipt.v1",
+  "receipt_id": "receipt-0",
+  "checklist_id": "cl-0",
+  "title": "example artifact checklist",
+  "fold": "met",
+  "artifact_ok": true,
+  "evidence_ok": true,
+  "artifact_url": "https://raw.githubusercontent.com/Fortune9thx/artifact-checklist-receipt/master/docs/EXAMPLE_ARTIFACT.json",
+  "artifact_sha256": "e92b23b34509b58a99c593aa6a3ecaf0d307f52f88286e4213779c657dd1bcb9",
+  "expected_artifact_sha256": "e92b23b34509b58a99c593aa6a3ecaf0d307f52f88286e4213779c657dd1bcb9",
+  "checks": [
+    {"id": "c1", "pass": true},
+    {"id": "c2", "pass": true},
+    {"id": "c3", "pass": true}
+  ],
+  "submitted_by": "0xC6E6d3b2acCaECeCeB40Ad4bD3dF123DDCB4e537"
+}
+```
+
+This is the primitive working live: the committed artifact's SHA-256 (`e92b23b3…bcb9`) is the one every validator recomputed as `artifact_sha256`, and each check (`status == "ok"`, `score >= 1`, `name == "artifact-checklist-receipt"`) was re-evaluated by consensus over the freshly fetched JSON rather than trusted from the leader.
 
 The same procedure is reproducible with [`scripts/live_smoke.py`](scripts/live_smoke.py), which takes the signing key from the `ACR_PRIVATE_KEY` environment variable and never stores a secret in the repository.
 

@@ -43,7 +43,7 @@ from genlayer_py.chains import (
     testnet_bradbury,
 )
 
-DEFAULT_ADDRESS = "ACR_DEPLOY_ADDRESS_PLACEHOLDER"
+DEFAULT_ADDRESS = "0x12ccdC7A77eBBc5b907293E606EE317B69bcD2c7"
 DEFAULT_REPO = "Fortune9thx/artifact-checklist-receipt"
 DEFAULT_ARTIFACT_URL = (
     "https://raw.githubusercontent.com/"
